@@ -101,10 +101,13 @@ export const jsonManifest: PluginImpl<IOptions> = _options => {
 				...bundlesActions,
 				...assetsActions,
 			];
-			actions.push( new ManifestAction( postProcessedOpts, actions ) );
+			const actionsWithManifest = [
+				...actions,
+				...ManifestAction.gather( postProcessedOpts, actions ),
+			];
 
-			const allFilters = flatMap( actions, action => action.filters );
-			await Promise.all( actions.map( action => action.run( allFilters ) ) );
+			const allFilters = flatMap( actionsWithManifest, action => action.filters );
+			await Promise.all( actionsWithManifest.map( action => action.run( allFilters ) ) );
 		},
 	};
 };

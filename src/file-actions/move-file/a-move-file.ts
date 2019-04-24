@@ -27,9 +27,9 @@ export abstract class AMoveFile extends AFileAction implements IMoveFile {
 					filter as TFileFilterFactory ) );
 	}
 
-	protected static generateFilenameReplaceFilter( file: IMoveFile ): NodeJS.ReadWriteStream;
-	protected static generateFilenameReplaceFilter( inFile: string, outFile: string ): NodeJS.ReadWriteStream;
-	protected static generateFilenameReplaceFilter( file: IMoveFile | string, _outFile?: string ): NodeJS.ReadWriteStream {
+	public static generateFilenameReplaceFilter( file: IMoveFile ): NodeJS.ReadWriteStream;
+	public static generateFilenameReplaceFilter( inFile: string, outFile: string ): NodeJS.ReadWriteStream;
+	public static generateFilenameReplaceFilter( file: IMoveFile | string, _outFile?: string ): NodeJS.ReadWriteStream {
 			const { inFile, outFile } = isString( file ) ? { inFile: file, outFile: _outFile } : file;
 			if ( isNil( inFile ) || isNil( outFile ) ) {
 				throw new Error();
