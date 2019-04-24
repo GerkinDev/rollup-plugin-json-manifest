@@ -29,11 +29,8 @@ export class ManifestAction extends AFileAction {
 			},       this.options.existingManifest );
 
 		const manifestStream = new Readable();
-		const manifestWriteStream = manifestStream
-			.pipe( await this.prepareOutput() );
 		manifestStream.push( JSON.stringify( content, null, 4 ) );
 		manifestStream.push( null );
-
-		return streamToPromise( manifestWriteStream );
+		return this.passThroughFilters( manifestStream, [] );
 	}
 }

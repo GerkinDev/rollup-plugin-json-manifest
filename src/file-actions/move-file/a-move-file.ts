@@ -49,10 +49,6 @@ export abstract class AMoveFile extends AFileAction implements IMoveFile {
 	}
 
 	public async run( filters: Array<() => NodeJS.ReadWriteStream> ) {
-		return streamToPromise( filters.reduce(
-				( stream: ReadStream | NodeJS.ReadWriteStream, filter ) => stream.pipe( filter() ),
-				createReadStream( this.inFile ),
-			)
-			.pipe( await this.prepareOutput() ) );
+		return this.passThroughFilters( createReadStream( this.inFile ), filters );
 	}
 }
