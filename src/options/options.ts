@@ -126,7 +126,7 @@ export const transformOptions = ( options: IOptions | undefined ): IOptionsDefau
 		};
 
 const makeFilenameGenerator = ( pattern: string ): TFilenameGenerator => ( filename: string, hash: string ): string => {
-	const ext = filename.replace( /^.*(\.(?:\w+)(?:\.map)?)$/, '$1' );
+	const ext = filename.replace( /^.*?(\.(?:\w+)(?:\.map)?)$/, '$1' );
 	const bundle = dirname( filename ) + sep + basename( filename, ext );
 	return pattern
 		.replace( '[bundle]', bundle )
