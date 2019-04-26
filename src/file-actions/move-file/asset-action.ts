@@ -24,8 +24,7 @@ export class AssetAction extends AMoveFile {
 		const manifestExistingFiles = Object.keys( options.existingManifest );
 		const assetsFiles = reject(
 			files.filter( file => !file.endsWith( '.map' ) ),
-			file => some( existingActions, action => join( options.inDir, file ) === action.inFile ||
-				some( manifestExistingFiles, manifestFile => file.endsWith( manifestFile ) ) ) );
+			file => some( existingActions, action => join( options.inDir, file ) === action.inFile ) );
 		return Promise.all( assetsFiles.map( async filepath => {
 			const sourcePath = join( options.inDir, filepath );
 			const hash = await hasha.fromFile(
